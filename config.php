@@ -1,7 +1,4 @@
 <?php
-// ============================================================
-//  config.php  —  edit these values before uploading
-// ============================================================
 
 define('DB_HOST', 'sql111.infinityfree.com');
 define('DB_NAME', 'if0_41004146_tasks');
@@ -12,10 +9,10 @@ define('DB_CHARSET', 'utf8mb4');
 define('SITE_NAME', 'JSLearn');
 define('SITE_URL',  'https://decode.fwh.is'); // no trailing slash
 
-// Session lifetime (seconds)
+
 define('SESSION_LIFETIME', 60 * 60 * 24 * 7); // 7 days
 
-// Rank thresholds (XP required)
+
 define('RANKS', [
     ['title' => 'Beginner',    'min_xp' =>    0, 'icon' => '○'],
     ['title' => 'Apprentice',  'min_xp' =>   50, 'icon' => '◎'],
@@ -28,7 +25,7 @@ define('RANKS', [
     ['title' => 'Legend',      'min_xp' => 2500, 'icon' => '⬡'],
 ]);
 
-// ── PDO connection (shared across all pages) ─────────────────────────────────
+
 function getDB() {
     static $pdo = null;
     if ($pdo === null) {
@@ -43,7 +40,7 @@ function getDB() {
     return $pdo;
 }
 
-// ── Session helpers ───────────────────────────────────────────────────────────
+
 function sessionStart() {
     if (session_status() === PHP_SESSION_NONE) {
         ini_set('session.cookie_httponly', '1');
@@ -65,7 +62,7 @@ function requireLogin() {
     }
 }
 
-// ── Rank calculator ───────────────────────────────────────────────────────────
+
 function rankForXP($xp) {
     $current = RANKS[0];
     $next    = null;
@@ -84,7 +81,7 @@ function rankForXP($xp) {
     return ['current' => $current, 'next' => $next, 'progress' => round($progress)];
 }
 
-// ── CSRF helpers ─────────────────────────────────────────────────────────────
+
 function csrfToken() {
     sessionStart();
     if (empty($_SESSION['csrf_token'])) {
